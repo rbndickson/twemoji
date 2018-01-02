@@ -26,6 +26,7 @@
     }
     </style>
     <script src="https://twemoji.maxcdn.com/2/twemoji.min.js?2.4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@1/dist/clipboard.min.js"></script>
   </head>
   <body>
     <ul class="emoji-list">
@@ -2727,10 +2728,15 @@
     );
     (function(img, metaKey, i) {
       function copyToClipboard(e) {
-        const indexFrom = this.src.lastIndexOf("/") + 1
-        const indexTo = this.src.lastIndexOf(".")
-        const emojiCode = this.src.substring(indexFrom, indexTo)
-        prompt("Copy to clipboard via " + metaKey + "+C and Enter", emojiCode);
+        const indexFrom = this.src.lastIndexOf("/") + 1;
+        const indexTo = this.src.lastIndexOf(".");
+        const emojiCode = this.src.substring(indexFrom, indexTo);
+        var textArea = document.createElement('textarea');
+        textArea.value = emojiCode;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
       }
       for (i = 0; i < img.length; img[i++].onclick = copyToClipboard) {}
     })(

@@ -2716,24 +2716,27 @@
       <li>&#xE50A;</li>
     </ul>
     <script>
-    var ul = document.getElementsByTagName('ul')[0];
-    var total = ul.getElementsByTagName('li').length;
-    var elapsed = +new Date;
-    twemoji.parse(ul, {"size":72});
-    elapsed = (+new Date) - elapsed;
+    var ul = document.getElementsByTagName("ul")[0];
+    var total = ul.getElementsByTagName("li").length;
+    var elapsed = +new Date();
+    twemoji.parse(ul, { size: 72 });
+    elapsed = +new Date() - elapsed;
     document.body.insertBefore(
-      document.createTextNode(total + ' emoji parsed in ' + elapsed + 'ms'),
+      document.createTextNode(total + " emoji parsed in " + elapsed + "ms"),
       document.body.firstChild
     );
-    (function (img, metaKey, i) {
+    (function(img, metaKey, i) {
       function copyToClipboard(e) {
-        prompt('Copy to clipboard via ' + metaKey + '+C and Enter', this.alt);
+        const indexFrom = this.src.lastIndexOf("/") + 1
+        const indexTo = this.src.lastIndexOf(".")
+        const emojiCode = this.src.substring(indexFrom, indexTo)
+        prompt("Copy to clipboard via " + metaKey + "+C and Enter", emojiCode);
       }
       for (i = 0; i < img.length; img[i++].onclick = copyToClipboard) {}
-    }(
-      document.getElementsByTagName('img'),
-      /\b(?:Mac |i)OS\b/i.test(navigator.userAgent) ? 'Command' : 'Ctrl'
-    ));
+    })(
+      document.getElementsByTagName("img"),
+      /\b(?:Mac |i)OS\b/i.test(navigator.userAgent) ? "Command" : "Ctrl"
+    );
     </script>
   </body>
 </html>
